@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a36">
+  <meta name="description" content="Descubre los servicios de Campeones Barber Shop en Versalles, Puerto Vallarta.">
+  <title>Campeones Barber Shop | Puerto Vallarta</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --night: #080d1c;
+      --navy: #092b78;
+      --blue: #0759e8;
+      --blue-bright: #2879ff;
+      --gold: #ffd400;
+      --gold-light: #fff05a;
+      --red: #ef3340;
+      --cream: #f8f4e9;
+      --muted: #b8bfd1;
+      --line: rgba(255, 240, 90, .24);
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--night); color: var(--cream); font-family: var(--sans); }
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    .shell { width: min(1160px, calc(100% - 48px)); margin-inline: auto; }
+    .topline { height: 5px; background: linear-gradient(90deg,var(--blue-bright),var(--gold-light) 34%,var(--gold) 67%,var(--red)); }
+    .showcase-stage { position: relative; overflow: hidden; isolation: isolate; background: radial-gradient(ellipse at 78% 31%,rgba(0,91,255,.52),transparent 42%),radial-gradient(ellipse at 12% 25%,rgba(205,29,56,.17),transparent 34%),linear-gradient(120deg,#090d1d,#082d83 62%,#061b4e); }
+    .stage-grain { position: absolute; inset: 0; z-index: -1; opacity: .2; pointer-events: none; background-image: radial-gradient(rgba(255,255,255,.4) .55px,transparent .7px); background-size: 7px 7px; mask-image: linear-gradient(120deg,#000,transparent 75%); }
+    .header { position: relative; z-index: 5; border-bottom: 1px solid rgba(255,255,255,.12); background: linear-gradient(90deg,rgba(8,12,25,.9),rgba(12,17,34,.55)); backdrop-filter: blur(14px); }
+    .nav { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; }
+    .brand-mark { width: 94px; height: 66px; overflow: hidden; border: 1px solid rgba(255,203,53,.78); border-radius: 50%; background: #071127; box-shadow: 0 0 20px rgba(255,198,41,.16); }
+    .brand-mark img { width: 100%; height: 100%; object-fit: cover; }
+    .nav-links { display: flex; align-items: center; gap: 30px; color: #e2e5ef; font-size: 10px; font-weight: 850; letter-spacing: .16em; text-transform: uppercase; }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-cta { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; gap: 10px; padding: 0 18px; border: 1px solid #fff9a6; color: #17120a; background: linear-gradient(110deg,#fff56a,var(--gold) 65%,#ffc400); box-shadow: 0 8px 26px rgba(255,212,0,.3); font-size: 10px; font-weight: 950; letter-spacing: .13em; text-transform: uppercase; }
+    .nav-cta:hover,.hero-cta:hover { filter: brightness(1.08); transform: translateY(-2px); }
+    .barber-pole { position: absolute; z-index: 4; top: 50%; right: clamp(4px,calc(7vw - 68px),16px); width: clamp(136px,10.3vw,150px); height: min(360px,calc(100% - 32px)); object-fit: contain; object-position: center center; transform: translateY(-50%) rotate(0deg) skewX(0deg) skewY(0deg); transform-origin: center center; filter: drop-shadow(14px 19px 10px rgba(0,0,0,.62)) drop-shadow(0 0 9px rgba(255,212,0,.2)); pointer-events: none; }
+    .hero { position: relative; z-index: 1; padding: 74px 0 46px; }
+    .hero-grid { display: grid; grid-template-columns: 1.08fr .92fr; align-items: center; gap: 38px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--gold-light); font-size: 10px; font-weight: 900; letter-spacing: .24em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 28px; height: 2px; background: linear-gradient(90deg,var(--red),var(--gold)); }
+    h1,h2,h3,p { margin-top: 0; }
+    h1 { max-width: 600px; margin: 22px 0 17px; font-family: var(--serif); font-size: clamp(46px,4.9vw,64px); line-height: .97; letter-spacing: -.05em; }
+    h1 span { color: var(--gold-light); text-shadow: 0 0 32px rgba(255,198,41,.24); }
+    .hero-copy { max-width: 470px; margin-bottom: 24px; color: #d0d5e2; font-size: 15px; line-height: 1.8; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 22px; color: #aeb8d0; font-size: 10px; font-weight: 750; letter-spacing: .08em; }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 7px; }
+    .hero-meta i { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+    .hero-cta { display: flex; width: min(100%,430px); min-height: 58px; align-items: center; justify-content: space-between; gap: 18px; padding: 11px 18px; border: 1px solid #fff9a6; border-radius: 3px; color: #17120a; background: linear-gradient(105deg,#fff56a,#ffd400 62%,#ffc400); box-shadow: 0 10px 30px rgba(255,212,0,.3); transition: .2s ease; }
+    .hero-cta strong { display: block; font-size: 11px; font-weight: 950; letter-spacing: .13em; text-transform: uppercase; }
+    .hero-cta small { display: block; margin-top: 4px; color: #57420c; font-size: 8px; font-weight: 800; letter-spacing: .06em; }
+    .hero-cta svg { width: 20px; height: 20px; }
+    .hero-brand { position: relative; z-index: 1; width: min(100%,400px); margin-right: 68px; justify-self: end; display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .hero-visual { position: relative; z-index: 1; width: 100%; aspect-ratio: 1/1; display: grid; place-items: center; }
+    .hero-visual::before { content: ""; position: absolute; inset: 5%; border: 1px solid rgba(255,214,88,.48); border-radius: 50%; box-shadow: 0 0 0 13px rgba(255,201,48,.025),0 0 0 35px rgba(69,102,236,.04),0 0 48px rgba(45,85,224,.18); }
+    .hero-visual::after { content: ""; position: absolute; inset: 13%; border: 1px dashed rgba(255,225,122,.2); border-radius: 50%; }
+    .emblem-frame { position: relative; z-index: 1; width: 79%; aspect-ratio: 1/1; overflow: hidden; border: 1px solid rgba(255,208,63,.76); border-radius: 50%; background: #071127; box-shadow: 0 26px 70px rgba(0,0,0,.42),0 0 45px rgba(255,197,30,.09); }
+    .emblem-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .hero-visual-label { position: relative; z-index: 1; margin-top: -3px; padding: 9px 15px; border-top: 1px solid rgba(255,214,88,.58); color: #f4ebd2; font-size: 9px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
+    .promo-section { position: relative; z-index: 1; padding: 12px 0 64px; }
+    .promo-intro { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 19px; padding-right: 76px; }
+    .promo-intro h2 { margin: 9px 0 0; font-family: var(--serif); font-size: clamp(28px,3.5vw,44px); line-height: 1.05; }
+    .promo-intro h2 span { color: var(--gold-light); }
+    .promo-intro p { max-width: 340px; margin: 0; color: var(--muted); font-size: 11px; line-height: 1.7; }
+    .promo-grid { display: grid; grid-template-columns: minmax(0,1fr) 210px minmax(0,1fr) 210px minmax(0,1fr); }
+    .promo-card:nth-child(1) { grid-column: 2; }
+    .promo-card:nth-child(2) { grid-column: 4; }
+    .promo-card { position: relative; overflow: hidden; aspect-ratio: 9/16; border: 1px solid rgba(255,225,122,.8); border-radius: 8px; background: radial-gradient(ellipse at 50% 43%,rgba(54,103,255,.7),transparent 59%),linear-gradient(145deg,#1c2c63,#090d1a 76%); box-shadow: 0 15px 36px rgba(0,0,0,.3),0 0 20px rgba(255,198,41,.12); }
+    .promo-card:nth-child(2) { background: radial-gradient(ellipse at 50% 43%,rgba(223,42,75,.64),transparent 58%),linear-gradient(145deg,#48213c,#0d0b16 76%); }
+    .promo-video { position: absolute; z-index: 4; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #080b12; }
+    .promo-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 16px 12px; text-align: center; }
+    .promo-number { color: var(--gold-light); font-size: 8px; font-weight: 950; letter-spacing: .2em; text-transform: uppercase; }
+    .promo-play { position: absolute; top: 50%; left: 50%; width: 54px; height: 54px; display: grid; place-items: center; border: 1px solid var(--gold-light); border-radius: 50%; color: var(--gold-light); background: rgba(255,198,41,.16); box-shadow: 0 0 28px rgba(255,198,41,.22); transform: translate(-50%,-50%); }
+    .promo-play svg { width: 17px; height: 17px; margin-left: 3px; fill: currentColor; }
+    .promo-copy { color: #fffaf0; font-family: var(--serif); font-size: clamp(18px,2.2vw,24px); font-weight: 700; line-height: 1.05; text-shadow: 0 2px 12px rgba(0,0,0,.75); }
+    .promo-foot { color: #d8deee; font-size: 8px; font-weight: 850; letter-spacing: .15em; text-transform: uppercase; }
+    .section { padding: 88px 0; }
+    .section-dark { background: #0c1122; }
+    .section-title { max-width: 720px; margin: 0 auto 40px; text-align: center; }
+    .section-title .eyebrow { justify-content: center; }
+    .section-title h2 { margin: 12px 0; font-family: var(--serif); font-size: clamp(36px,5vw,58px); line-height: 1.04; }
+    .section-title h2 span { color: var(--gold-light); }
+    .section-title p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+    .service-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; }
+    .service-card { position: relative; display: flex; min-height: 250px; flex-direction: column; padding: 21px 18px 17px; overflow: hidden; border: 1px solid rgba(255,255,255,.12); background: linear-gradient(155deg,rgba(35,48,86,.8),rgba(15,20,38,.98) 75%); transition: transform .2s ease,border-color .2s ease,box-shadow .2s ease; }
+    .service-card:hover { transform: translateY(-5px); border-color: rgba(255,205,48,.72); box-shadow: 0 14px 34px rgba(0,0,0,.35),0 0 26px rgba(50,91,224,.18); }
+    .service-card::after { content: ""; position: absolute; width: 116px; height: 116px; right: -54px; top: -55px; border: 1px solid rgba(255,205,48,.22); border-radius: 50%; box-shadow: 0 0 0 12px rgba(255,205,48,.025),0 0 0 25px rgba(55,98,233,.025); }
+    .service-index { display: flex; align-items: center; justify-content: space-between; margin-bottom: 23px; color: #9eafd9; font-size: 8px; font-weight: 900; letter-spacing: .2em; text-transform: uppercase; }
+    .service-index b { width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid rgba(255,200,45,.45); color: var(--gold-light); background: rgba(31,71,186,.2); font-family: var(--serif); font-size: 15px; }
+    .service-card h3 { min-height: 45px; margin: 0 0 8px; color: #fff9e9; font-family: var(--serif); font-size: 22px; line-height: 1.12; }
+    .service-card p { margin: 0 0 18px; color: #b9c2d7; font-size: 11px; line-height: 1.65; }
+    .service-link { display: inline-flex; align-items: center; gap: 8px; margin-top: auto; color: var(--gold-light); font-size: 9px; font-weight: 950; letter-spacing: .14em; text-transform: uppercase; }
+    .service-link svg { width: 15px; height: 15px; }
+    .gallery-heading { margin: 76px auto 22px; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
+    .gallery-item { position: relative; display: flex; min-height: 220px; align-items: end; overflow: hidden; border: 1px solid rgba(255,211,74,.38); background: radial-gradient(ellipse at 50% 38%,rgba(54,93,201,.36),transparent 62%),linear-gradient(145deg,#1a2340,#0d1120); }
+    .gallery-item::before { content: "✦"; position: absolute; top: 39%; left: 50%; color: rgba(255,221,120,.45); font-size: 38px; transform: translate(-50%,-50%); text-shadow: 0 0 26px rgba(255,195,33,.4); }
+    .gallery-item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .gallery-caption { position: relative; z-index: 1; width: 100%; padding: 44px 14px 13px; background: linear-gradient(transparent,rgba(5,8,18,.92)); color: #fff8e8; font-size: 10px; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
+    .gallery-caption small { display: block; margin-top: 5px; color: var(--gold-light); font-size: 8px; letter-spacing: .12em; }
+    .booking { position: relative; overflow: hidden; padding: 86px 0; background: radial-gradient(ellipse at 10% 15%,rgba(221,41,69,.17),transparent 35%),radial-gradient(ellipse at 90% 75%,rgba(47,86,216,.28),transparent 42%),linear-gradient(120deg,#101629,#15224a 58%,#101629); }
+    .booking-grid { display: grid; grid-template-columns: .92fr 1.08fr; align-items: center; gap: 54px; }
+    .booking-copy .eyebrow { margin-bottom: 14px; }
+    .booking-copy h2 { margin: 0 0 15px; font-family: var(--serif); font-size: clamp(40px,5vw,62px); line-height: .98; }
+    .booking-copy h2 span { color: var(--gold-light); }
+    .booking-copy p { max-width: 420px; margin: 0; color: #c9d0e1; font-size: 13px; line-height: 1.75; }
+    .booking-card { padding: 27px; border: 1px solid rgba(255,225,122,.7); background: linear-gradient(145deg,rgba(25,34,61,.96),rgba(10,15,29,.98)); box-shadow: 0 18px 55px rgba(0,0,0,.32),0 0 35px rgba(255,202,56,.08); }
+    .booking-card h3 { margin: 0 0 6px; color: var(--gold-light); font-family: var(--serif); font-size: 28px; }
+    .booking-card > p { margin: 0 0 20px; color: #b8c1d6; font-size: 11px; }
+    .booking-form { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+    .booking-field { display: grid; gap: 7px; }
+    .booking-field label { color: #fff2ce; font-size: 9px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+    .booking-field input,.booking-field select { width: 100%; min-height: 46px; padding: 0 12px; border: 1px solid rgba(207,219,255,.28); border-radius: 2px; outline: none; background: #0b1328; color: #fff; font-size: 12px; }
+    .booking-field input:focus,.booking-field select:focus { border-color: var(--gold-light); box-shadow: 0 0 0 3px rgba(255,198,41,.13); }
+    .booking-submit { grid-column: 1/-1; min-height: 52px; margin-top: 4px; border: 0; color: #17120a; background: linear-gradient(100deg,#fff08a,#ffc629 60%,#ff9d24); box-shadow: 0 8px 24px rgba(255,190,27,.23); cursor: pointer; font-size: 10px; font-weight: 950; letter-spacing: .16em; text-transform: uppercase; }
+    .booking-note { margin: 12px 0 0; color: #9faac2; font-size: 9px; line-height: 1.6; text-align: center; }
+    .booking-status { min-height: 18px; margin: 9px 0 0; color: var(--gold-light); font-size: 11px; font-weight: 750; text-align: center; }
+    .about { padding: 82px 0; background: linear-gradient(110deg,#f4f0e5,#e8edf9); color: #141a2a; }
+    .about-grid { display: grid; grid-template-columns: 270px 1fr; align-items: center; gap: 55px; }
+    .about-logo { position: relative; width: 250px; aspect-ratio: 1/1; display: grid; place-items: center; }
+    .about-logo::before { content: ""; position: absolute; inset: 0; border: 1px solid rgba(30,69,179,.35); border-radius: 50%; box-shadow: 0 0 0 14px rgba(34,75,196,.035),0 0 0 30px rgba(248,190,31,.05); }
+    .about-logo img { position: relative; width: 82%; height: 82%; border: 1px solid rgba(22,55,156,.28); border-radius: 50%; object-fit: cover; box-shadow: 0 16px 35px rgba(9,18,44,.18); }
+    .about-copy h2 { margin: 12px 0; font-family: var(--serif); font-size: clamp(35px,4.5vw,54px); line-height: 1.02; }
+    .about-copy h2 span { color: #2043a5; }
+    .about-copy p { max-width: 660px; margin: 0; color: #4b5260; font-size: 13px; line-height: 1.85; }
+    .about-points { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 20px; }
+    .about-points span { padding: 8px 11px; border: 1px solid rgba(33,67,165,.18); color: #293552; background: rgba(255,255,255,.46); font-size: 8px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    .contact { padding: 78px 0 35px; background: #0c1020; }
+    .contact-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 60px; align-items: start; }
+    .contact-copy h2 { margin: 12px 0; font-family: var(--serif); font-size: clamp(36px,4.8vw,56px); line-height: 1.03; }
+    .contact-copy h2 span { color: var(--gold-light); }
+    .contact-copy p { max-width: 420px; color: var(--muted); font-size: 13px; line-height: 1.75; }
+    .contact-action { display: inline-flex; align-items: center; gap: 10px; margin-top: 11px; padding-bottom: 7px; border-bottom: 1px solid var(--gold); color: var(--gold-light); font-size: 10px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+    .contact-list { display: grid; gap: 11px; }
+    .contact-item { display: flex; align-items: center; gap: 14px; padding: 15px; border: 1px solid rgba(255,255,255,.11); background: rgba(255,255,255,.025); }
+    .contact-icon { width: 36px; height: 36px; flex: 0 0 36px; display: grid; place-items: center; border: 1px solid rgba(255,200,45,.4); color: var(--gold-light); }
+    .contact-icon svg { width: 17px; height: 17px; }
+    .contact-item small { display: block; margin-bottom: 4px; color: #96a2bd; font-size: 8px; font-weight: 900; letter-spacing: .17em; text-transform: uppercase; }
+    .contact-item a,.contact-item span { color: #f0eee8; font-size: 12px; font-weight: 700; line-height: 1.5; }
+    .contact-item a:hover { color: var(--gold-light); }
+    .footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 66px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.1); color: #9ca5bc; font-size: 9px; letter-spacing: .1em; }
+    .footer strong { color: var(--gold-light); letter-spacing: .14em; }
+    [hidden] { display: none !important; }
+    /* Acabado editorial premium */
+    .header { border-bottom-color: rgba(255,212,0,.24); background: linear-gradient(90deg,rgba(6,10,24,.96),rgba(8,20,55,.86)); }
+    .nav { min-height: 88px; }
+    .brand-mark { width: 100px; height: 70px; border-color: rgba(255,212,0,.9); box-shadow: 0 0 0 4px rgba(255,212,0,.045),0 0 28px rgba(255,212,0,.22); }
+    .nav-links a { position: relative; padding: 10px 0; }
+    .nav-links a::after { content: ""; position: absolute; right: 0; bottom: 2px; left: 0; height: 1px; background: linear-gradient(90deg,transparent,var(--gold),transparent); transform: scaleX(0); transform-origin: center; transition: transform .24s ease; }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-cta,.hero-cta,.booking-submit { border-radius: 4px; }
+    .nav-cta { box-shadow: 0 8px 28px rgba(255,212,0,.23),inset 0 1px 0 rgba(255,255,255,.72); }
+    .showcase-stage { background: radial-gradient(ellipse at 78% 31%,rgba(0,91,255,.48),transparent 42%),radial-gradient(ellipse at 12% 25%,rgba(205,29,56,.14),transparent 34%),linear-gradient(120deg,#090d1d,#092b78 62%,#061b4e); }
+    .hero { padding-top: 78px; }
+    .hero-cta { box-shadow: 0 12px 34px rgba(255,212,0,.26),inset 0 1px 0 rgba(255,255,255,.76); }
+    .hero-visual-label { color: #fff4c7; letter-spacing: .22em; }
+    .promo-section { padding-top: 20px; }
+    .promo-card { border-radius: 10px; border-color: rgba(255,225,122,.68); box-shadow: 0 20px 42px rgba(0,0,0,.34),0 0 25px rgba(0,77,255,.16); transition: transform .28s ease,box-shadow .28s ease,border-color .28s ease; }
+    .promo-card::after { content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit; background: linear-gradient(135deg,rgba(255,255,255,.15),transparent 25%,transparent 70%,rgba(255,212,0,.08)); }
+    .promo-card:hover { transform: translateY(-5px); border-color: var(--gold); box-shadow: 0 24px 48px rgba(0,0,0,.42),0 0 30px rgba(0,89,255,.22); }
+    .promo-play { background: rgba(255,212,0,.2); box-shadow: 0 0 30px rgba(255,212,0,.32),inset 0 0 15px rgba(255,255,255,.16); }
+    .section-dark { background: radial-gradient(ellipse at 50% 0%,rgba(9,47,137,.28),transparent 54%),linear-gradient(180deg,#0b1020,#090e1b 85%); }
+    .section-title { margin-bottom: 46px; }
+    .section-title h2 { letter-spacing: -.035em; }
+    .service-grid { gap: 16px; }
+    .service-card { min-height: 260px; padding: 23px 19px 18px; border-color: rgba(255,255,255,.13); border-radius: 6px; background: linear-gradient(150deg,rgba(15,39,103,.55),rgba(14,19,36,.98) 72%); box-shadow: 0 12px 30px rgba(0,0,0,.14); }
+    .service-card::before { content: ""; position: absolute; top: 0; left: 19px; width: 42px; height: 2px; background: linear-gradient(90deg,var(--gold-light),var(--gold),transparent); }
+    .service-card:hover { border-color: rgba(255,212,0,.76); box-shadow: 0 18px 38px rgba(0,0,0,.36),0 0 26px rgba(0,74,255,.17); }
+    .service-index b { border-radius: 50%; border-color: rgba(255,212,0,.62); background: rgba(0,74,209,.22); }
+    .service-card h3 { color: #fffdf4; }
+    .service-link { transition: gap .2s ease,color .2s ease; }
+    .service-link:hover { gap: 12px; color: #fff05a; }
+    .gallery-item { border-radius: 6px; border-color: rgba(255,212,0,.42); box-shadow: 0 12px 30px rgba(0,0,0,.18); transition: transform .25s ease,border-color .25s ease,box-shadow .25s ease; }
+    .gallery-item:hover { transform: translateY(-4px); border-color: rgba(255,212,0,.82); box-shadow: 0 18px 36px rgba(0,0,0,.32),0 0 20px rgba(0,83,255,.16); }
+    .gallery-item img { transition: transform .5s ease; }
+    .gallery-item:hover img { transform: scale(1.035); }
+    .booking { background: radial-gradient(ellipse at 84% 16%,rgba(0,86,255,.35),transparent 38%),radial-gradient(ellipse at 10% 85%,rgba(195,26,52,.13),transparent 36%),linear-gradient(120deg,#090d1d,#0b2a75 58%,#081633); }
+    .booking-card { position: relative; overflow: hidden; border-radius: 8px; border-color: rgba(255,212,0,.76); background: linear-gradient(145deg,rgba(16,29,66,.98),rgba(7,12,25,.99)); box-shadow: 0 24px 64px rgba(0,0,0,.42),0 0 38px rgba(255,212,0,.09); }
+    .booking-card::before { content: ""; position: absolute; top: 0; left: 27px; width: 64px; height: 2px; background: linear-gradient(90deg,var(--gold-light),var(--gold),transparent); }
+    .booking-field input,.booking-field select { border-radius: 4px; background: rgba(5,13,34,.92); }
+    .booking-submit { background: linear-gradient(100deg,#fff45e,#ffd400 60%,#ffc400); box-shadow: 0 10px 30px rgba(255,212,0,.22),inset 0 1px 0 rgba(255,255,255,.68); transition: filter .2s ease,transform .2s ease; }
+    .booking-submit:hover { filter: brightness(1.07); transform: translateY(-2px); }
+    .about { background: linear-gradient(110deg,#fffdf5,#eff3ff); }
+    .about-logo img { border-color: rgba(255,212,0,.75); box-shadow: 0 20px 46px rgba(9,18,44,.2),0 0 28px rgba(0,75,220,.1); }
+    .about-points span { border-radius: 3px; border-color: rgba(0,66,181,.22); }
+    .contact { background: radial-gradient(ellipse at 85% 0%,rgba(0,74,220,.2),transparent 37%),#080d1c; }
+    .contact-item { border-radius: 5px; transition: border-color .22s ease,transform .22s ease,background .22s ease; }
+    .contact-item:hover { transform: translateX(4px); border-color: rgba(255,212,0,.4); background: rgba(255,255,255,.045); }
+    .contact-icon { border-radius: 3px; border-color: rgba(255,212,0,.58); }
+    .footer { border-top-color: rgba(255,212,0,.24); }
+    @media(max-width:900px) {
+      .hero-grid { grid-template-columns: 1fr .88fr; gap: 28px; }
+      .hero-brand { width: min(100%,330px); margin-right: 42px; justify-self: center; }
+      .service-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .booking-grid { gap: 32px; }
+      .about-grid { grid-template-columns: 210px 1fr; gap: 32px; }
+      .about-logo { width: 205px; }
+    }
+    @media(max-width:700px) {
+      .shell { width: min(100% - 32px,1160px); }
+      .nav { min-height: 70px; }
+      .brand-mark { width: 76px; height: 54px; }
+      .nav-links { display: none; }
+      .nav-cta { min-height: 42px; padding: 0 12px; font-size: 8px; letter-spacing: .08em; }
+      .barber-pole { right: 4px; width: 140px; }
+      .hero { padding: 38px 0 30px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 12px; }
+      .hero-brand { order: -1; width: min(calc(100% - 32px),300px); margin-right: 48px; justify-self: center; transform: translateX(-12px); }
+      .barber-pole { top: 64px; right: -8px; bottom: auto; width: auto; max-width: 105px; height: min(225px,calc(79vw - 60px)); transform: rotate(0deg) skewX(0deg) skewY(0deg); }
+      .hero-visual-label { margin-top: -2px; padding: 8px 10px; font-size: 7px; letter-spacing: .16em; }
+      .hero-grid > div:first-child { padding-right: 48px; }
+      h1 { margin: 14px 0; font-size: clamp(38px,10vw,54px); }
+      .hero-copy { font-size: 12px; }
+      .hero-cta { width: calc(100% - 3px); min-height: 54px; padding: 9px 12px; }
+      .hero-cta strong { font-size: 9px; }
+      .hero-cta small { font-size: 7px; }
+      .promo-section { padding: 10px 0 42px; }
+      .promo-intro { display: block; max-width: calc(100% - 50px); margin-bottom: 14px; padding-right: 0; }
+      .promo-intro p { margin-top: 6px; }
+      .promo-grid { grid-template-columns: minmax(0,190px); justify-content: center; }
+      .promo-card:nth-child(1), .promo-card:nth-child(2) { grid-column: auto; }
+      .promo-card:nth-child(2) { display: none; }
+      .section { padding: 66px 0; }
+      .section-title { margin-bottom: 28px; }
+      .service-grid { grid-template-columns: 1fr; gap: 10px; }
+      .service-card { min-height: 0; padding: 19px; }
+      .service-index { margin-bottom: 15px; }
+      .service-card h3 { min-height: 0; }
+      .gallery-heading { margin-top: 52px; }
+      .gallery-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px; }
+      .gallery-item { min-height: 155px; }
+      .gallery-caption { padding: 34px 9px 10px; font-size: 8px; }
+      .gallery-caption small { font-size: 7px; }
+      .booking { padding: 65px 0; }
+      .booking-grid,.about-grid,.contact-grid { grid-template-columns: 1fr; }
+      .booking-card { padding: 20px 16px; }
+      .booking-form { gap: 10px; }
+      .booking-field input,.booking-field select { min-height: 44px; }
+      .about { padding: 62px 0; }
+      .about-logo { width: 190px; justify-self: center; }
+      .contact { padding: 65px 0 28px; }
+      .footer { align-items: flex-start; flex-direction: column; gap: 9px; margin-top: 40px; }
+    }
+    @media(prefers-reduced-motion:reduce) {
+      html { scroll-behavior: auto; }
+      *,*::before,*::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+    @media(max-width:330px) {
+      .hero-brand { width: min(calc(100% - 32px),248px); margin-right: 32px; transform: none; }
+      .barber-pole { right: -4px; max-width: 92px; height: min(188px,calc(79vw - 60px)); }
+    }
+    /* Acabado final: lujo nocturno, masculino y sobrio */
+    :root { --gold:#d7ad5a; --gold-light:#f1d995; --cream:#f4f0e7; --muted:#aeb7c8; --line:rgba(215,173,90,.22); }
+    body { background:#070a11; color:var(--cream); }
+    .topline { height:4px; background:linear-gradient(90deg,#07101d,#9d783b 28%,#f0d58c 50%,#9d783b 72%,#07101d); }
+    .showcase-stage { background:radial-gradient(ellipse at 78% 31%,rgba(17,78,184,.44),transparent 42%),radial-gradient(ellipse at 13% 25%,rgba(91,18,34,.19),transparent 34%),linear-gradient(118deg,#070a12 0%,#0a1935 42%,#09245b 72%,#07101d 100%); }
+    .stage-grain { opacity:.13; background-size:8px 8px; mask-image:linear-gradient(120deg,#000,transparent 78%); }
+    .header { border-bottom-color:rgba(215,173,90,.28); background:linear-gradient(90deg,rgba(5,8,15,.97),rgba(7,16,35,.94)); }
+    .nav-links { color:#e5e0d5; }
+    .nav-cta,.hero-cta,.booking-submit { border-color:#f0d995; color:#1b160d; background:linear-gradient(112deg,#f4e4b5 0%,#d2ad61 48%,#ecd38e 100%); box-shadow:0 9px 27px rgba(174,132,53,.2),inset 0 1px 0 rgba(255,255,255,.66); }
+    .hero-cta small { color:#4d3a19; }
+    .eyebrow { color:#f1d995; }
+    .eyebrow::before { background:linear-gradient(90deg,#8e2632,#d7ad5a); }
+    h1 span,.promo-intro h2 span,.section-title h2 span,.booking-copy h2 span,.contact-copy h2 span,.about-copy h2 span { color:#f1d995; text-shadow:0 0 28px rgba(215,173,90,.16); }
+    .hero-visual::before { border-color:rgba(215,173,90,.55); box-shadow:0 0 0 13px rgba(215,173,90,.025),0 0 0 35px rgba(32,79,168,.05),0 0 55px rgba(28,68,149,.2); }
+    .hero-visual::after { border-style:solid; border-color:rgba(241,217,149,.12); }
+    .hero-visual-label { border-top-color:rgba(215,173,90,.48); color:#f4e7c3; }
+    .promo-card { border-color:rgba(215,173,90,.62); background:radial-gradient(ellipse at 50% 43%,rgba(24,73,162,.62),transparent 59%),linear-gradient(145deg,#10192b,#080b12 76%); box-shadow:0 20px 42px rgba(0,0,0,.42),0 0 24px rgba(18,53,118,.15); }
+    .promo-card:nth-child(2) { background:radial-gradient(ellipse at 50% 43%,rgba(105,28,47,.55),transparent 58%),linear-gradient(145deg,#281722,#0a0b11 76%); }
+    .promo-card:hover { border-color:#e8ca82; box-shadow:0 24px 48px rgba(0,0,0,.5),0 0 26px rgba(173,129,48,.12); }
+    .promo-play { border-color:#e5c575; color:#f1d995; background:rgba(171,126,43,.15); box-shadow:0 0 26px rgba(215,173,90,.17),inset 0 0 12px rgba(255,255,255,.1); }
+    .section-dark { background:radial-gradient(ellipse at 50% 0%,rgba(16,48,112,.22),transparent 55%),linear-gradient(180deg,#0a0e18,#070a11 88%); }
+    .service-card { border-color:rgba(215,173,90,.16); background:linear-gradient(150deg,rgba(18,35,68,.7),rgba(10,13,22,.99) 72%); box-shadow:0 14px 32px rgba(0,0,0,.24); }
+    .service-card::before { background:linear-gradient(90deg,#f1d995,#a77d37,transparent); }
+    .service-card:hover { border-color:rgba(215,173,90,.68); box-shadow:0 18px 38px rgba(0,0,0,.42),0 0 24px rgba(167,125,55,.1); }
+    .service-index { color:#b5c0d4; }
+    .service-index b { border-color:rgba(215,173,90,.48); color:#f1d995; background:rgba(10,25,51,.56); }
+    .gallery-item { border-color:rgba(215,173,90,.38); background:radial-gradient(ellipse at 50% 38%,rgba(26,55,105,.3),transparent 62%),linear-gradient(145deg,#141a27,#080b12); }
+    .gallery-item:hover { border-color:rgba(241,217,149,.78); box-shadow:0 18px 36px rgba(0,0,0,.4),0 0 20px rgba(167,125,55,.1); }
+    .booking { background:radial-gradient(ellipse at 84% 16%,rgba(20,70,157,.3),transparent 38%),radial-gradient(ellipse at 10% 85%,rgba(75,19,34,.16),transparent 36%),linear-gradient(120deg,#080b12,#0c1d3a 58%,#070b14); }
+    .booking-card { border-color:rgba(215,173,90,.62); background:linear-gradient(145deg,rgba(16,25,43,.98),rgba(7,10,17,.99)); box-shadow:0 24px 64px rgba(0,0,0,.48),0 0 34px rgba(215,173,90,.06); }
+    .booking-card h3 { color:#f1d995; }
+    .booking-field label { color:#ead9ad; }
+    .booking-field input,.booking-field select { border-color:rgba(215,173,90,.22); background:#090f1b; }
+    .booking-field input:focus,.booking-field select:focus { border-color:#e5c575; box-shadow:0 0 0 3px rgba(215,173,90,.12); }
+    .about { background:radial-gradient(ellipse at 12% 50%,rgba(18,53,116,.28),transparent 40%),linear-gradient(110deg,#0d111a,#121a28); color:#f4f0e7; }
+    .about-logo::before { border-color:rgba(215,173,90,.36); box-shadow:0 0 0 14px rgba(215,173,90,.025),0 0 0 30px rgba(28,59,112,.07); }
+    .about-logo img { border-color:rgba(215,173,90,.55); box-shadow:0 20px 46px rgba(0,0,0,.38),0 0 28px rgba(18,53,116,.16); }
+    .about-copy p { color:#bac2d0; }
+    .about-points span { border-color:rgba(215,173,90,.23); color:#e8d8ae; background:rgba(255,255,255,.025); }
+    .contact { background:radial-gradient(ellipse at 85% 0%,rgba(15,54,125,.2),transparent 37%),#070a11; }
+    .contact-item { border-color:rgba(215,173,90,.15); background:rgba(255,255,255,.018); }
+    .contact-item:hover { border-color:rgba(215,173,90,.42); background:rgba(255,255,255,.035); }
+    .contact-icon { border-color:rgba(215,173,90,.42); color:#f1d995; }
+    .footer { border-top-color:rgba(215,173,90,.22); }
+    /* Cambia solo images/inicio-fondo.jpg para sustituir la foto de fondo del inicio. */
+    .showcase-stage { background-image:radial-gradient(ellipse at 78% 31%,rgba(12,66,157,.34),transparent 44%),linear-gradient(108deg,rgba(4,7,14,.76) 0%,rgba(6,14,30,.55) 52%,rgba(4,9,21,.62) 100%),url("images/inicio-fondo.jpg"); background-position:center,center,center; background-size:auto,auto,cover; background-attachment:scroll,scroll,fixed; background-repeat:no-repeat; }
+    ::selection { color:#15110a; background:#e7c978; }
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+  <header class="header">
+    <div class="shell nav">
+      <a class="brand" href="#inicio" aria-label="Campeones Barber Shop, inicio"><span class="brand-mark"><img src="images/campeones-barbershop.png" alt="Emblema de Campeones Barber Shop"></span></a>
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="#servicios">Servicios</a>
+        <a href="#videos">Promociones</a>
+        <a href="#barberia">La barbería</a>
+        <a href="#ubicacion">Ubicación</a>
+      </nav>
+      <a class="nav-cta" href="#reservar">Agenda tu visita <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main>
+    <div class="showcase-stage" id="inicio">
+      <div class="stage-grain" aria-hidden="true"></div>
+      <section class="hero">
+        <img class="barber-pole" src="images/barber-pole-wall.png" alt="" aria-hidden="true">
+        <div class="shell hero-grid">
+          <div>
+            <div class="eyebrow">Puerto Vallarta · Versalles</div>
+            <h1>Tradición que se nota.<br><span>Estilo que se siente.</span></h1>
+            <p class="hero-copy">Un buen corte cambia la manera en que entras a cualquier lugar. Encuentra tu próximo estilo en Campeones.</p>
+            <a class="hero-cta" href="#reservar">
+              <span><strong>Reserva tu corte</strong><small>Elige fecha, hora y servicio</small></span>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <div class="hero-meta"><span><i></i> Atención en Versalles</span><span><i></i> Puerto Vallarta, Jalisco</span></div>
+          </div>
+          <div class="hero-brand">
+            <div class="hero-visual" aria-label="Emblema de Campeones Barber Shop">
+              <div class="emblem-frame"><img src="images/campeones-barbershop.png" alt="Logo oficial de Campeones Barber Shop"></div>
+            </div>
+            <div class="hero-visual-label">Tradición · Actitud · Precisión</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="promo-section" id="videos">
+        <div class="shell">
+          <div class="promo-intro">
+            <div><div class="eyebrow">En la silla de Campeones</div><h2>El estilo cobra <span>vida.</span></h2></div>
+            <p>Dos espacios listos para mostrar promociones en video vertical.</p>
+          </div>
+          <div class="promo-grid" aria-label="Videos promocionales de la barbería">
+            <article class="promo-card">
+              <video class="promo-video" controls playsinline preload="metadata" hidden aria-label="Video promocional uno"></video>
+              <div class="promo-placeholder">
+                <span class="promo-number">Promo 01</span>
+                <span class="promo-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4v16l13-8L7 4Z"/></svg></span>
+                <span class="promo-copy">Tu estilo.<br>Tu momento.<br>Campeones.</span>
+                <span class="promo-foot">Video próximamente</span>
+              </div>
+            </article>
+            <article class="promo-card">
+              <video class="promo-video" controls playsinline preload="metadata" hidden aria-label="Video promocional dos"></video>
+              <div class="promo-placeholder">
+                <span class="promo-number">Promo 02</span>
+                <span class="promo-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4v16l13-8L7 4Z"/></svg></span>
+                <span class="promo-copy">Precisión<br>en cada<br>detalle.</span>
+                <span class="promo-foot">Video próximamente</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <section class="section section-dark" id="servicios">
+      <div class="shell">
+        <div class="section-title">
+          <div class="eyebrow">Elige tu estilo</div>
+          <h2>Servicios de <span>barbería</span></h2>
+          <p>Explora las opciones y consulta disponibilidad y precio vigente directamente con el equipo.</p>
+        </div>
+        <div class="service-grid" id="serviceGrid"></div>
+
+        <div class="section-title gallery-heading">
+          <div class="eyebrow">Estilos de Campeones</div>
+          <h2>Trabajos que <span>hablan.</span></h2>
+          <p>Cortes, detalles y acabados realizados en la barbería.</p>
+        </div>
+        <div class="gallery-grid" aria-label="Fotos de servicios y cortes realizados">
+          <figure class="gallery-item"><img src="images/servicios/servicio-01.jpg" alt="Corte y arreglo de barba en Campeones Barber Shop" loading="lazy"><figcaption class="gallery-caption">Corte y barba<small>Estilo Campeones</small></figcaption></figure>
+          <figure class="gallery-item"><img src="images/servicios/servicio-02.jpg" alt="Perfilado de barba en Campeones Barber Shop" loading="lazy"><figcaption class="gallery-caption">Barba perfilada<small>Estilo Campeones</small></figcaption></figure>
+          <figure class="gallery-item"><img src="images/servicios/servicio-03.jpg" alt="Corte degradado en Campeones Barber Shop" loading="lazy"><figcaption class="gallery-caption">Corte degradado<small>Estilo Campeones</small></figcaption></figure>
+          <figure class="gallery-item"><img src="images/servicios/servicio-04.jpg" alt="Corte moderno en Campeones Barber Shop" loading="lazy"><figcaption class="gallery-caption">Corte moderno<small>Estilo Campeones</small></figcaption></figure>
+          <figure class="gallery-item"><img src="images/servicios/servicio-05.jpg" alt="Corte con textura en Campeones Barber Shop" loading="lazy"><figcaption class="gallery-caption">Corte con textura<small>Estilo Campeones</small></figcaption></figure>
+          <figure class="gallery-item"><img src="images/servicios/servicio-06.jpg" alt="Corte y acabado de barba en Campeones Barber Shop" loading="lazy"><figcaption class="gallery-caption">Corte y acabado<small>Estilo Campeones</small></figcaption></figure>
+        </div>
+
+        <div class="section-title gallery-heading">
+          <div class="eyebrow">Galería Campeones</div>
+          <h2>La barbería <span>por dentro.</span></h2>
+          <p>Un vistazo al espacio, al equipo y a la experiencia Campeones.</p>
+        </div>
+        <div class="gallery-grid" aria-label="Galería de Campeones Barber Shop">
+          <figure class="gallery-item"><img src="images/galeria/galeria-01.jpg" alt="Equipo de Campeones Barber Shop" loading="lazy"><figcaption class="gallery-caption">El equipo<small>Campeones Barber Shop</small></figcaption></figure>
+          <figure class="gallery-item"><img src="images/galeria/galeria-02.jpg" alt="Ambiente de la barbería Campeones" loading="lazy"><figcaption class="gallery-caption">Buen ambiente<small>Campeones Barber Shop</small></figcaption></figure>
+          <figure class="gallery-item"><img src="images/galeria/galeria-03.jpg" alt="Barberos trabajando en Campeones Barber Shop" loading="lazy"><figcaption class="gallery-caption">Manos expertas<small>Campeones Barber Shop</small></figcaption></figure>
+          <figure class="gallery-item"><img src="images/galeria/galeria-04.jpg" alt="Corte de cabello en Campeones Barber Shop" loading="lazy"><figcaption class="gallery-caption">En la silla<small>Campeones Barber Shop</small></figcaption></figure>
+          <figure class="gallery-item"><img src="images/galeria/galeria-05.jpg" alt="Interior de Campeones Barber Shop" loading="lazy"><figcaption class="gallery-caption">Nuestro espacio<small>Campeones Barber Shop</small></figcaption></figure>
+          <figure class="gallery-item"><img src="images/galeria/galeria-06.jpg" alt="Atención al cliente en Campeones Barber Shop" loading="lazy"><figcaption class="gallery-caption">Atención Campeones<small>Campeones Barber Shop</small></figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="booking" id="reservar">
+      <div class="shell booking-grid">
+        <div class="booking-copy">
+          <div class="eyebrow">Tu próxima visita empieza aquí</div>
+          <h2>Tu tiempo.<br><span>Tu estilo.</span></h2>
+          <p>Indica el servicio, la fecha y la hora que prefieres. Por ahora este formato es una muestra visual; confirma tu cita llamando a la barbería.</p>
+        </div>
+        <div class="booking-card">
+          <h3>Agenda tu corte</h3>
+          <p>Cuéntanos qué servicio buscas.</p>
+          <form class="booking-form" id="bookingForm" novalidate>
+            <div class="booking-field"><label for="bookingDate">Fecha</label><input id="bookingDate" name="date" type="date"></div>
+            <div class="booking-field"><label for="bookingTime">Hora</label><input id="bookingTime" name="time" type="time" step="1800"></div>
+            <div class="booking-field" style="grid-column:1/-1"><label for="bookingService">Tipo de corte o servicio</label><select id="bookingService" name="service"></select></div>
+            <button class="booking-submit" type="submit">Solicitar reservación <span aria-hidden="true">✦</span></button>
+          </form>
+          <p class="booking-note">La solicitud todavía no se guarda ni se envía. Llámanos para confirmar.</p>
+          <p class="booking-status" id="bookingStatus" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="barberia">
+      <div class="shell about-grid">
+        <div class="about-logo"><img src="images/campeones-barbershop.png" alt="Emblema de Campeones Barber Shop"></div>
+        <div class="about-copy">
+          <div class="eyebrow">Más que un corte</div>
+          <h2>Un espacio para salir con <span>actitud.</span></h2>
+          <p>Campeones Barber Shop está en la colonia Versalles, Puerto Vallarta. Consulta por teléfono los servicios disponibles y sus tarifas vigentes antes de tu visita.</p>
+          <div class="about-points"><span>Colonia Versalles</span><span>Puerto Vallarta</span><span>Barbería masculina</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="ubicacion">
+      <div class="shell contact-grid">
+        <div class="contact-copy">
+          <div class="eyebrow">Te esperamos</div>
+          <h2>Nos vemos en <span>Campeones.</span></h2>
+          <p>Estamos en Versalles, Puerto Vallarta. Llama para consultar precios y reservar tu visita.</p>
+          <a class="contact-action" href="https://www.facebook.com/campeonesbarbershop" target="_blank" rel="noreferrer">Visitar Facebook <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="contact-list">
+          <div class="contact-item"><span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.7"/></svg></span><div><small>Dirección</small><a href="https://maps.google.com/?q=Morelia+130+C,+Versalles,+Puerto+Vallarta" target="_blank" rel="noreferrer">Morelia 130 C, Versalles<br>Puerto Vallarta, Jalisco</a></div></div>
+          <div class="contact-item"><span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3H5a2 2 0 0 0-2 2c0 8.8 7.2 16 16 16a2 2 0 0 0 2-2v-2l-5-2-2 3a15 15 0 0 1-7-7l3-2-3-5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span><div><small>Teléfono</small><a href="tel:+523222609510">+52 322 260 9510</a></div></div>
+          <div class="contact-item"><span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3H5a2 2 0 0 0-2 2c0 8.8 7.2 16 16 16a2 2 0 0 0 2-2v-2l-5-2-2 3a15 15 0 0 1-7-7l3-2-3-5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span><div><small>Móvil</small><a href="tel:+523222005664">+52 322 200 5664</a></div></div>
+        </div>
+      </div>
+      <div class="shell footer"><strong>CAMPEONES BARBER SHOP</strong><span>Tradición · Actitud · Precisión</span><a href="#inicio">Volver al inicio ↑</a></div>
+    </section>
+  </main>
+
+  <script>
+    const PROMO_VIDEO_SOURCES = [
+      "videos/promocional-01.mp4",
+      "videos/promocional-02.mp4"
+    ];
+
+    document.querySelectorAll(".promo-card").forEach((card,index) => {
+      const source = PROMO_VIDEO_SOURCES[index];
+      if (!source) return;
+      const video = card.querySelector("video");
+      video.src = source;
+      video.hidden = false;
+      card.querySelector(".promo-placeholder").hidden = true;
+    });
+
+    const SERVICE_DATA = [
+      {name:"Corte de cabello para caballero",category:"Cabello",description:"Consulta por el corte que tienes en mente y confirma disponibilidad."},
+      {name:"Corte clásico",category:"Cabello",description:"Pregunta por las opciones de corte clásico disponibles en la barbería."},
+      {name:"Corte degradado",category:"Cabello",description:"Comenta el estilo que buscas y consulta disponibilidad."},
+      {name:"Arreglo de barba",category:"Barba",description:"Consulta por el perfilado y mantenimiento que necesitas."},
+      {name:"Afeitado tradicional",category:"Barba",description:"Pregunta por las opciones de afeitado disponibles."},
+      {name:"Tinte de barba",category:"Cuidado",description:"Consulta tonos, disponibilidad y precio vigente."},
+      {name:"Servicio de barbería para niños",category:"Cabello",description:"Pregunta por horarios y disponibilidad para los más pequeños."},
+      {name:"Cuidado capilar",category:"Cuidado",description:"Consulta qué tratamientos capilares ofrece actualmente el equipo."}
+    ];
+    const SERVICE_SYMBOLS = {Cabello:"✂",Barba:"◈",Cuidado:"✦"};
+    const serviceGrid = document.getElementById("serviceGrid");
+    const bookingService = document.getElementById("bookingService");
+
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
+    }
+
+    function renderServices() {
+      serviceGrid.innerHTML = SERVICE_DATA.map((service,index) =>
+        '<article class="service-card">' +
+          '<div class="service-index"><span>Campeones · ' + String(index + 1).padStart(2,"0") + '</span><b>' + SERVICE_SYMBOLS[service.category] + '</b></div>' +
+          '<h3>' + escapeHtml(service.name) + '</h3>' +
+          '<p>' + escapeHtml(service.description) + '</p>' +
+          '<a class="service-link" href="https://www.facebook.com/campeonesbarbershop" target="_blank" rel="noreferrer">Consultar servicio <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>' +
+        '</article>'
+      ).join("");
+      bookingService.innerHTML = '<option value="" disabled selected>Selecciona un servicio</option>' +
+        SERVICE_DATA.map(item => '<option value="' + escapeHtml(item.name) + '">' + escapeHtml(item.name) + '</option>').join("");
+    }
+
+    renderServices();
+    const localToday = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0,10);
+    document.getElementById("bookingDate").min = localToday;
+    document.getElementById("bookingForm").addEventListener("submit",event => {
+      event.preventDefault();
+      document.getElementById("bookingStatus").textContent = "Esta es una muestra visual. Llama al 322 260 9510 para confirmar tu cita.";
+    });
+  </script>
+</body>
+</html>
